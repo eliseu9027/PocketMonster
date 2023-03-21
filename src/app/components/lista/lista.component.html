@@ -1,0 +1,81 @@
+<form>
+  <div class="container-center margem">
+    <div class="row">
+      <div
+        class="col-1 margem"
+        *ngFor="let lista of paginaAtual; let i = index"
+      >
+        <div
+          class="card text-white border-secondary border-dark"
+          style="width: 8.8rem;  box-shadow: 0 0 15px #e9e5e5"
+        >
+          <a [routerLink]="['/busca', paginaAtual[i].name]">
+            <div class="card-header bg-dark" style="height: 3rem;">
+              <h6 class="card-title text-capitalize">
+                {{ paginaAtual[i].name }}
+              </h6>
+            </div>
+          </a>
+          <div class="card-body fundotest" style="background-image: url({{paginaAtual[i].back}});">
+            <img
+              class="card-img-top"
+              [src]="paginaAtual[i].img"
+              onError="this.src = 'assets/img/404-notfound.png'"
+            />
+          </div>
+          <div class="card-footer bg-dark" style="height: 6rem">
+            <h6>ID: {{ paginaAtual[i].id }}</h6>
+            <h6>
+              <img
+                class="icon-type"
+                [class]="paginaAtual[i].estilo"
+                [src]="paginaAtual[i].icone"
+              />
+              {{ paginaAtual[i].type }}
+            </h6>
+            <h6>
+              <img
+                class="icon-type"
+                [class]="paginaAtual[i].estilo2"
+                [src]="paginaAtual[i].icone2"
+              />
+              {{ paginaAtual[i].type2 }}
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="text-center">
+  <button
+    class="btn btn-dark btn-sm espacamento-botoes"
+    [disabled]="habilitaRetrocesso()"
+    (click)="primeira()"
+  >
+    primeira
+  </button>
+  <button
+    class="btn btn-dark espacamento-botoes"
+    [disabled]="habilitaRetrocesso()"
+    (click)="anteriorPagina()"
+  >
+    Anterior
+  </button>
+
+  <button
+    class="btn btn-dark espacamento-botoes"
+    [disabled]="habilitaAvanco()"
+    (click)="proximaPagina()"
+  >
+    Proximo
+  </button>
+  <button
+    class="btn btn-dark btn-sm espacamento-botoes"
+    [disabled]="habilitaAvanco()"
+    (click)="ultima()"
+  >
+    ultima
+  </button>
+</div>

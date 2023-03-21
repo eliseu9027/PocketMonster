@@ -1,0 +1,286 @@
+<div class="margem" style="margin-bottom: 10px">
+  <div class="container-center margem">
+    <div class="row justify-content-md-center">
+      <div class="col-9-md-auto">
+        <form>
+          <form [formGroup]="formulario" (ngSubmit)="buscaPokemon()">
+            <div class="container-center">
+              <div class="row justify-content-md-center">
+                <div class="col-md-6">
+                  <div class="form-group input-group">
+                    <input
+                      formControlName="nomePokemon"
+                      class="form-control"
+                      name="nomePokemon"
+                      type="text"
+                      [(ngModel)]="nomePokemon"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-dark btn-block"
+                        type="submit"
+                        [disabled]="!formulario.valid"
+                      >
+                        Buscar
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="
+                      formulario.get('nomePokemon')?.errors &&
+                      formulario.get('nomePokemon')?.touched
+                    "
+                  >
+                    Campo não pode ser vazio!!!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="pokemon.id"
+    class="container-left"
+    style="margin-top: 1%; margin-left: 2.5%"
+  >
+    <div class="row justify-content-md-left">
+      <div class="col-lg-auto">
+        <div class="card" style="width: 22rem; box-shadow: 0 0 35px whitesmoke">
+          <div class="card-header bg-dark">
+            <h5 class="card-title text-light text-capitalize">
+              <img class="icon-table" src="/assets/img/pngkit_poke.png" /> #{{
+                pokemon.id
+              }}
+              {{ pokemon.name }}
+            </h5>
+          </div>
+          <ngb-carousel>
+            <ng-template ngbSlide>
+              <div class="card-body fundotest" style="background-image: url({{back}});">
+                <img
+                  class="card-img-top"
+                  [src]="pokemon.imgShiny"
+                  onError="this.src = 'assets/img/404-notfound.png'"
+                />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="card-body fundotest" style="background-image: url({{back}});">
+                <img
+                  class="card-img-top"
+                  [src]="pokemon.img"
+                  onError="this.src = 'assets/img/404-notfound.png'"
+                />
+              </div>
+            </ng-template>
+          </ngb-carousel>
+          <div class="card-footer bg-dark text-center text-light">
+            <div>
+              <a
+                class="link-light text-capitalize fs-6 text-decoration-none"
+                [routerLink]="['/listaTipo', tipo]"
+                ><img class="icon-type" [class]="estilo" [src]="icone" />
+                {{ pokemon.type }}
+              </a>
+              <a
+                *ngIf="tipo2 != undefined"
+                class="link-light text-capitalize fs-6 text-decoration-none"
+                [routerLink]="['/listaTipo', tipo2]"
+                >/ <img class="icon-type" [class]="estilo2" [src]="icone2" />
+                {{ pokemon.type2 }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-auto">
+        <table
+          class="table table-danger table-responsible-md"
+          style="width: 30rem; margin-left: 6%; box-shadow: 0 0 35px whitesmoke"
+        >
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Atributos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                <img class="icon-table" src="/assets/img/weight-512.png" /> Peso
+              </th>
+              <td><ngb-progressbar
+                [value]="pokemon.weight"
+                [max]="2000"
+                >{{ pokemon.weight }}
+              </ngb-progressbar></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <img class="icon-table" src="/assets/img/height-icon.png" />
+                Altura
+              </th>
+              <td>
+                <ngb-progressbar
+                  [value]="pokemon.height"
+                  [max]="100"
+                  >{{ pokemon.height }}
+                </ngb-progressbar>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <img class="icon-table" src="/assets/img/life-bar.png" /> HP
+              </th>
+              <td>
+                <ngb-progressbar [value]="pokemon.hp" type="danger" [max]="180"
+                  >{{ pokemon.hp }}
+                </ngb-progressbar>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <img class="icon-table" src="/assets/img/spear.png" /> Ataque
+              </th>
+              <td>
+                <ngb-progressbar
+                  [value]="pokemon.attack"
+                  type="warning"
+                  [max]="180"
+                >
+                  {{ pokemon.attack }}
+                </ngb-progressbar>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <img class="icon-table" src="/assets/img/shield.png" /> Defesa
+              </th>
+              <td>
+                <ngb-progressbar
+                  [value]="pokemon.defense"
+                  type="secondary"
+                  >{{ pokemon.defense }}
+                </ngb-progressbar>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <img class="icon-table" src="/assets/img/atackspecial.png" />
+                Ataque Especial
+              </th>
+              <td>
+                <ngb-progressbar
+                  [value]="pokemon.specialAttack"
+                  type="success"
+                  >{{ pokemon.specialAttack }}</ngb-progressbar
+                >
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <img class="icon-table" src="/assets/img/specialdefense.png" />
+                Defesa Especial
+              </th>
+              <td>
+                <ngb-progressbar
+                  [value]="pokemon.specialDefense"
+                  type="dark"
+                  >{{ pokemon.specialDefense }}</ngb-progressbar
+                >
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <img class="icon-table" src="/assets/img/bootswings.png" />
+                Velocidade
+              </th>
+              <td>
+                <ngb-progressbar
+                  [value]="pokemon.speed"
+                  type="info"
+                  >{{ pokemon.speed }}</ngb-progressbar
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!--
+        <div
+          class="card text-white border-secondary border-dark"
+          style="width: 20rem; box-shadow: 0 0 35px #e9e5e5"
+        >
+          <div class="row g-0 card-header bg-dark text-center">
+            <h5 class="card-title text-light text-capitalize">
+              {{ pokemon.name }}
+            </h5>
+          </div>
+
+          <div class="card-body fundotest" style="background-image: url({{back}});">
+            <img
+              class="card-img-top"
+              [src]="pokemon.img"
+              onError="this.src = 'assets/img/404-notfound.png'"
+            />
+          </div>
+          <div class="card-footer bg-dark text-center text-light">
+            <a
+              class="link-light text-capitalize fs-6 text-decoration-none"
+              [routerLink]="['/listaTipo', tipo]"
+              ><img class="icon-type" [class]="estilo" [src]="icone" />
+              {{ pokemon.type }}
+            </a>
+
+            <a
+              *ngIf="tipo2 != undefined"
+              class="link-light text-capitalize fs-6 text-decoration-none"
+              [routerLink]="['/listaTipo', tipo2]"
+              >/ <img class="icon-type" [class]="estilo2" [src]="icone2" />
+              {{ pokemon.type2 }}
+            </a>
+          </div>
+        </div>
+
+        <div
+        class="card text-white border-secondary border-dark"
+        style="width: 20rem; box-shadow: 0 0 35px #bcd820"
+      >
+        <div class="row g-0 card-header bg-dark text-center">
+          <h5 class="card-title text-light text-capitalize">
+            {{ pokemon.name }} / SHINY
+          </h5>
+        </div>
+
+        <div class="card-body fundotest" style="background-image: url({{back}});">
+          <img
+            class="card-img-top"
+            [src]="pokemon.imgShiny"
+            onError="this.src = 'assets/img/404-notfound.png'"
+          />
+        </div>
+        <div class="card-footer bg-dark text-center text-light">
+          <a
+            class="link-light text-capitalize fs-6 text-decoration-none"
+            [routerLink]="['/listaTipo', tipo]"
+            ><img class="icon-type" [class]="estilo" [src]="icone" />
+            {{ pokemon.type }}
+          </a>
+          <a
+            *ngIf="tipo2 != undefined"
+            class="link-light text-capitalize fs-6 text-decoration-none"
+            [routerLink]="['/listaTipo', tipo2]"
+            >/ <img class="icon-type" [class]="estilo2" [src]="icone2" />
+            {{ pokemon.type2 }}
+          </a>
+        </div>
+      </div>
+-->
+    </div>
+  </div>
+</div>

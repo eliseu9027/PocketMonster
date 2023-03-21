@@ -1,0 +1,148 @@
+<form (ngSubmit)="buscaTipo()" style="margin-top: 2%;">
+  <div class="wrapper">
+    <input
+      class="form-control"
+      name="tipo"
+      type="text"
+      hidden=""
+      [(ngModel)]="tipo"
+    />
+    <button
+      class="icon normal btn btn-outline-light"
+      (click)="tipo = 1; indexAtual = 0"
+    >
+      <img src="assets/icons/normal.svg" />
+    </button>
+
+    <button class="icon fighting btn btn-outline-light" (click)="tipo = 2">
+      <img src="assets/icons/fighting.svg" />
+    </button>
+
+    <button class="icon flying btn btn-outline-light" (click)="tipo = 3">
+      <img src="assets/icons/flying.svg" />
+    </button>
+
+    <button class="icon poison btn btn-outline-light" (click)="tipo = 4">
+      <img src="assets/icons/poison.svg" />
+    </button>
+
+    <button class="icon ground btn btn-outline-light" (click)="tipo = 5">
+      <img src="assets/icons/ground.svg" />
+    </button>
+
+    <button class="icon rock btn btn-outline-light" (click)="tipo = 6">
+      <img src="assets/icons/rock.svg" />
+    </button>
+
+    <button class="icon bug btn btn-outline-light" (click)="tipo = 7">
+      <img src="assets/icons/bug.svg" />
+    </button>
+
+    <button class="icon ghost btn btn-outline-light" (click)="tipo = 8">
+      <img src="assets/icons/ghost.svg" />
+    </button>
+
+    <button class="icon steel btn btn-outline-light" (click)="tipo = 9">
+      <img src="assets/icons/steel.svg" />
+    </button>
+
+    <button class="icon fire btn btn-outline-light" (click)="tipo = 10">
+      <img src="assets/icons/fire.svg" />
+    </button>
+
+    <button class="icon water btn btn-outline-light" (click)="tipo = 11">
+      <img src="assets/icons/water.svg" />
+    </button>
+
+    <button class="icon grass btn btn-outline-light" (click)="tipo = 12">
+      <img src="assets/icons/grass.svg" />
+    </button>
+
+    <button class="icon electric btn btn-outline-light" (click)="tipo = 13">
+      <img src="assets/icons/electric.svg" />
+    </button>
+
+    <button class="icon psychic btn btn-outline-light" (click)="tipo = 14">
+      <img src="assets/icons/psychic.svg" />
+    </button>
+
+    <button class="icon ice btn btn-outline-light" (click)="tipo = 15">
+      <img src="assets/icons/ice.svg" />
+    </button>
+
+    <button class="icon dragon btn-outline-light" (click)="tipo = 16">
+      <img src="assets/icons/dragon.svg" />
+    </button>
+
+    <button class="icon dark btn-outline-light" (click)="tipo = 17">
+      <img src="assets/icons/dark.svg" />
+    </button>
+
+    <button class="icon fairy btn-outline-light" (click)="tipo = 18">
+      <img src="assets/icons/fairy.svg" />
+    </button>
+  </div>
+</form>
+<div class="container-center margem" >
+  <div class="row justify-content">
+    <div
+      class="col-1 margem"
+      *ngFor="let pokemon of paginaAtual; let i = index"
+    >
+      <div
+        class="card text-white border-secondary border-dark"
+        style="width: 8.4rem; box-shadow: 0 0 15px #e9e5e5;"
+      >
+        <a [routerLink]="['/busca', paginaAtual[i].name]">
+          <div class="card-header bg-dark" style="height: 3rem">
+            <h6 class="card-title text-capitalize">
+              {{ paginaAtual[i].name }}
+            </h6>
+          </div>
+        </a>
+        <div class="card-body fundotest" style="background-image: url({{paginaAtual[i].back}});">
+          <img
+            class="card-img-top"
+            [src]="paginaAtual[i].img"
+            onError="this.src = 'assets/img/404-notfound.png'"
+          />
+        </div>
+        <div class="card-footer bg-dark">
+          <h6>ID: {{ paginaAtual[i].id }}</h6>
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom: 5%" class="text-center margem">
+      <button
+        class="btn btn-dark margem btn-sm"
+        [hidden]="habilitaRetrocesso()"
+        (click)="primeira()"
+      >
+        primeira
+      </button>
+      <button
+        class="btn btn-dark margem"
+        [hidden]="habilitaRetrocesso()"
+        (click)="anteriorPagina()"
+      >
+        Anterior
+      </button>
+
+      <button
+        class="btn btn-dark margem"
+        [hidden]="habilitaAvanco()"
+        (click)="proximaPagina()"
+      >
+        Proximo
+      </button>
+      <button
+        class="btn btn-dark margem btn-sm"
+        [hidden]="habilitaAvanco()"
+        (click)="ultima()"
+      >
+        ultima
+      </button>
+    </div>
+  </div>
+</div>
+

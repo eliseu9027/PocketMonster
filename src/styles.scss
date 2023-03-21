@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+.margem{
+  margin: 10px;
+  padding: auto;
+}
+
+.fundo {
+  background-image: url("/assets/img/red.png");
+  background-color: #AD251D;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: Helvetica, Arial, sans-serif;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+.carousel-inner .sr-only {
+  display: none;
+}
+
+.carousel-control-next .sr-only{
+  display: none;
+}
+
+.carousel-control-prev .sr-only{
+  display: none;
+}
